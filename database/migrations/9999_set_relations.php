@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->foreign('type_id')->references('id')->on('user_types')->onUpdate('cascade');
         });
-        Schema::table('students', function (Blueprint $table) {
+        Schema::table('groups', function (Blueprint $table) {
             $table->foreign('level_id')->references('id')->on('levels')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onUpdate('cascade')->onDelete('cascade');
+        });
+        Schema::table('students', function (Blueprint $table) {
             $table->foreign('group_id')->references('id')->on('groups')->onUpdate('cascade')->onDelete('cascade');
         });
     }

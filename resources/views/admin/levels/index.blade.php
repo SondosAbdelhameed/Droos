@@ -3,11 +3,11 @@
 <!-- Nav Header Component Start -->
 <x-dashboard.base.nav>
     <x-slot:heading>
-        المجموعــات
+        المستويــات
         </x-slot>
         {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
         <x-slot:link>
-            {{ route('groups.create') }}
+            {{ route('levels.create') }}
             </x-slot>
 </x-dashboard.base.nav>
 <!-- Nav Header Component End -->
@@ -21,7 +21,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">المجموعــات</h4>
+                            <h4 class="card-title">المستويــات</h4>
                         </div>
                     </div>
                     <div class="card-body px-0">
@@ -30,37 +30,31 @@
                                 <thead>
                                     <tr class="ligth">
                                         <th class="text-center">#</th>
-                                        <th>اسم المجموعه</th>
-                                        <th>المستوي</th>
-                                        <th>المادة</th>
+                                        <th>اسم المستوي</th>
                                         <th style="min-width: 100px">الإعدادات</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($groups as $index=>$group)
+                                    @foreach($levels as $index=>$level)
                                     <tr>
                                         <td class="text-center">{{ $index+1 }}</td>
-                                        <td>{{ $group->name }}</td>
-                                        <td>{{ $group->level->name }}</td>
-                                        <td>{{ $group->course->name }}</td>
+                                        <td>{{ $level->name }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action" style="display: flex;">
-                                                <x-dashboard.a-edit href="{{ route('groups.edit', $group->id) }}">
+                                                <x-dashboard.a-edit href="{{ route('levels.edit', $level->id) }}">
                                                 </x-dashboard.a-edit>&nbsp;
-                                                <form action="{{ route('groups.destroy', $group->id) }}" method="POST">
+                                                <form action="{{ route('levels.destroy', $level->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-dashboard.delete-button></x-dashboard.delete-button>
-                                                </form>&nbsp;
-                                                <x-dashboard.a-show href="{{ route('groups.show', $group->id) }}" title="عرض الطلاب الخاصة بالمجموعة" >
-                                                </x-dashboard.a-show>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $groups->links() }}
+                            {{ $levels->links() }}
                         </div>
                     </div>
                 </div>

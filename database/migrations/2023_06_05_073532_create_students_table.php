@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('barcode');
             $table->string('name',100);
-            $table->unsignedInteger('level_id')->unsigned();
+            $table->string('phone', 20);
             $table->unsignedInteger('group_id')->unsigned();
-            $table->string('photo', 100);
+            $table->string('photo', 100)->nullable();
             $table->boolean('active')->default(0);
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

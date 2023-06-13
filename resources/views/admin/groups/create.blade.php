@@ -43,6 +43,34 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="email">المستوي :</label>
+                                            <select class="form-control" name="level_id">
+                                            <option value="">المستوي</option>
+                                            @foreach ($levels as $level)
+                                            <option value="{{$level->id}}">
+                                                {{$level->name}}
+                                            </option>
+                                            @endforeach
+                                            </select>
+                                            @error('level_id')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="email">المادة :</label>
+                                            <select class="form-control" name="course_id">
+                                            <option value="">المادة</option>
+                                            @foreach ($courses as $course)
+                                            <option value="{{$course->id}}">
+                                                {{$course->name}}
+                                            </option>
+                                            @endforeach
+                                            </select>
+                                            @error('course_id')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                         <button type="submit" class="btn btn-primary">حفظ</button>
                                     </form>
                                 </div>

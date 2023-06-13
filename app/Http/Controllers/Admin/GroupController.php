@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreGroupRequest;
+use App\Http\Requests\Admin\StoreStudentRequest;
+use App\Models\Course;
 use App\Models\Group;
+use App\Models\Level;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -23,7 +27,9 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('admin.groups.create');
+        $levels = Level::get();
+        $courses = Course::get();
+        return view('admin.groups.create', compact('levels', 'courses'));
     }
 
     /**
@@ -38,9 +44,10 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Group $group)
     {
-        //
+        $students = Student::where('group_id', $group->id)->paginate(config('admin.pagination'));
+        return view('admin.groups.students-show', compact('students', 'group'));
     }
 
     /**
@@ -48,7 +55,9 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        return view('admin.groups.edit', compact('group'));
+        $levels = Level::get();
+        $courses = Course::get();
+        return view('admin.groups.edit', compact('group', 'levels', 'courses'));
     }
 
     /**
@@ -67,5 +76,29 @@ class GroupController extends Controller
     {
         $group->delete();
         return redirect()->route('groups.index')->with('success', 'Deleted Successfully');
+    }
+    public function createStudent($id)
+    {
+        $group = Group::find($id);
+        return view('admin.groups.create-students', compact('group'));
+    }
+    public function storeGroupStudent(StoreStudentRequest $request)
+    {
+        $student = new Student();
+        $student->barcode = rand(1000, 100000);
+        $student->name = $request->name;
+        $student->phone = $request->phone;
+        $student->group_id = $request->group_id;
+        if (request()->photo) {
+            $student->photo = $this->save_image($request->photo, $student->image);
+        }
+        $student->save();
+        return redirect()->route('groups.show', $request->group_id)->with('success', 'Added Successfully');
+    }
+    public function save_image($filename ,$path)
+    {
+        $file = time().'.'.$filename->getClientOriginalExtension();
+            request()->photo->move(public_path($path), $file);
+        return $file;
     }
 }
