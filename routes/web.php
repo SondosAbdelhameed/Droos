@@ -3,7 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\GroupController;
-use App\Http\Controllers\Admin\LevelsController;
+use App\Http\Controllers\Admin\LevelController;
+use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,13 @@ Route::group(
                 return view('admin.dashboard');
             });
             Route::resource('groups', GroupController::class);
-            Route::resource('levels', LevelsController::class);
+            Route::get('create_group_students/{id}', [GroupController::class, 'createStudent'])->name('create_group_students');
+            Route::post('store_group_students', [GroupController::class, 'storeGroupStudent'])->name('store_group_students');
+            
+            
+            Route::resource('levels', LevelController::class);
+            Route::resource('courses', CourseController::class);
+            Route::resource('students', StudentController::class);
     }
 );
 

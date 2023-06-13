@@ -13,6 +13,8 @@ class GroupSeeder extends Seeder
     {
         DB::table('groups')->insert([
             'name' => 'Group A',
+            'level_id' => 1,
+            'course_id' => 1
         ]);
     }
 }
