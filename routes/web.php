@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\GroupController;
 use App\Http\Controllers\Admin\LevelController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\ClassController;
+use App\Http\Controllers\Admin\AttendanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +31,19 @@ Route::group(
     function () {
             Route::get('dashboard', function () {
                 return view('admin.dashboard');
-            });
+            })->name('dashboard');
             Route::resource('groups', GroupController::class);
             Route::get('create_group_students/{id}', [GroupController::class, 'createStudent'])->name('create_group_students');
             Route::post('store_group_students', [GroupController::class, 'storeGroupStudent'])->name('store_group_students');
             
-            
             Route::resource('levels', LevelController::class);
             Route::resource('courses', CourseController::class);
             Route::resource('students', StudentController::class);
+            
+            Route::resource('classes', ClassController::class);
+            Route::get('end-class/{id}', [ClassController::class, 'endClass'])->name('end-class');
+            Route::resource('attendances', AttendanceController::class);
+            
     }
 );
 

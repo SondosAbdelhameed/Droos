@@ -23,6 +23,13 @@ return new class extends Migration
         Schema::table('students', function (Blueprint $table) {
             $table->foreign('group_id')->references('id')->on('groups')->onUpdate('cascade')->onDelete('cascade');
         });
+        Schema::table('classes', function (Blueprint $table) {
+            $table->foreign('group_id')->references('id')->on('groups')->onUpdate('cascade')->onDelete('cascade');
+        });
+        Schema::table('attendances', function (Blueprint $table) {
+            $table->foreign('class_id')->references('id')->on('classes')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')->onUpdate('cascade')->onDelete('cascade');
+        });
     }
 
     /**
