@@ -29,17 +29,17 @@
                 </div>
             </div>
             <div class="iq-header-img">
-                <img src="{{ url('../assets/admin/images/dashboard/top-header.png') }}" alt="header"
+                <img src="{{ url('assets/admin/images/dashboard/top-header.png') }}" alt="header"
                     class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{ url('../assets/admin/images/dashboard/top-header1.png') }}" alt="header"
+                <img src="{{ url('assets/admin/images/dashboard/top-header1.png') }}" alt="header"
                     class="theme-color-purple-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{ url('../assets/admin/images/dashboard/top-header2.png') }}" alt="header"
+                <img src="{{ url('assets/admin/images/dashboard/top-header2.png') }}" alt="header"
                     class="theme-color-blue-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{ url('../assets/admin/images/dashboard/top-header3.png') }}" alt="header"
+                <img src="{{ url('assets/admin/images/dashboard/top-header3.png') }}" alt="header"
                     class="theme-color-green-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{ url('../assets/admin/images/dashboard/top-header4.png') }}" alt="header"
+                <img src="{{ url('assets/admin/images/dashboard/top-header4.png') }}" alt="header"
                     class="theme-color-yellow-img img-fluid w-100 h-100 animated-scaleX">
-                <img src="{{ url('../assets/admin/images/dashboard/top-header5.png') }}" alt="header"
+                <img src="{{ url('assets/admin/images/dashboard/top-header5.png') }}" alt="header"
                     class="theme-color-pink-img img-fluid w-100 h-100 animated-scaleX">
             </div>
         </div>
@@ -352,7 +352,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
-                                                            src="{{ url('../assets/admin/images/shapes/01.png') }}" alt="profile">
+                                                            src="{{ url('assets/admin/images/shapes/01.png') }}" alt="profile">
                                                         <h6>Addidis Sportwear</h6>
                                                     </div>
                                                 </td>
@@ -389,7 +389,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
-                                                            src="{{ url('../assets/admin/images/shapes/05.png') }}" alt="profile">
+                                                            src="{{ url('assets/admin/images/shapes/05.png') }}" alt="profile">
                                                         <h6>Netflixer Platforms</h6>
                                                     </div>
                                                 </td>
@@ -422,7 +422,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
-                                                            src="{{ url('../assets/admin/images/shapes/02.png') }}" alt="profile">
+                                                            src="{{ url('assets/admin/images/shapes/02.png') }}" alt="profile">
                                                         <h6>Shopifi Stores</h6>
                                                     </div>
                                                 </td>
@@ -455,7 +455,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
-                                                            src="{{ url('../assets/admin/images/shapes/03.png') }}" alt="profile">
+                                                            src="{{ url('assets/admin/images/shapes/03.png') }}" alt="profile">
                                                         <h6>Bootstrap Technologies</h6>
                                                     </div>
                                                 </td>
@@ -496,7 +496,7 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <img class="rounded bg-soft-primary img-fluid avatar-40 me-3"
-                                                            src="{{ url('../assets/admin/images/shapes/04.png') }}" alt="profile">
+                                                            src="{{ url('assets/admin/images/shapes/04.png') }}" alt="profile">
                                                         <h6>Community First</h6>
                                                     </div>
                                                 </td>
