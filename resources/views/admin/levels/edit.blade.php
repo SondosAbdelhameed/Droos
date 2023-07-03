@@ -44,6 +44,14 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="email">سعر الحصة:</label>
+                                            <input type="text" class="form-control" placeholder="السعر" name="one_price"
+                                                value="{{ $level->one_price }}" required />
+                                            @error('one_price')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
                                         <button type="submit" class="btn btn-primary">حفظ</button>
                                     </form>
                                 </div>

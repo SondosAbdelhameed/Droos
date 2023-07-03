@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreLevelRequest;
 use App\Models\Level;
+use App\Models\MonthlyLevelPrice;
 use Illuminate\Http\Request;
 
 class LevelController extends Controller
@@ -67,5 +68,19 @@ class LevelController extends Controller
     {
         $level->delete();
         return redirect()->route('levels.index')->with('success', 'Deleted Successfully');
+    }
+    public function createMonth($id)
+    {
+        return view('admin.levels.create-month', compact('id'));
+    }
+    public function storeMonth(Request $request)
+    {
+        MonthlyLevelPrice::create($request->all());
+        return redirect()->route('levels.index')->with('success', 'Added Successfully');
+    }
+    public function monthDetails($id)
+    {
+        $month = MonthlyLevelPrice::find($id);
+        return view('admin.levels.month-details', compact('month'));
     }
 }

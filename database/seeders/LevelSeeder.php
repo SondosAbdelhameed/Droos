@@ -14,6 +14,7 @@ class LevelSeeder extends Seeder
     {
         DB::table('levels')->insert([
             'name' => 'level 1',
+            'one_price' => 50,
         ]);
     }
 }
