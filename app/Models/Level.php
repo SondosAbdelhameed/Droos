@@ -13,4 +13,8 @@ class Level extends Model
     {
         return $this->hasMany(Group::class);
     }
+    public function monthlyLevelPrices()
+    {
+        return $this->hasMany(MonthlyLevelPrice::class);
+    }
 }

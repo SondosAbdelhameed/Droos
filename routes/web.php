@@ -37,6 +37,11 @@ Route::group(
             Route::post('store_group_students', [GroupController::class, 'storeGroupStudent'])->name('store_group_students');
             
             Route::resource('levels', LevelController::class);
+            Route::get('level-create-month/{id}', [LevelController::class, 'createMonth'])->name('level-create-month');
+            Route::post('level-store-month', [LevelController::class, 'storeMonth'])->name('level-store-month');
+            Route::get('month-details/{id}', [LevelController::class, 'monthDetails'])->name('month-details');
+            
+            
             Route::resource('courses', CourseController::class);
             Route::resource('students', StudentController::class);
             

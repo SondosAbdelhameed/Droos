@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('levels', function (Blueprint $table) {
+        Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',100);
-            $table->unsignedSmallInteger('one_price');
+            $table->unsignedInteger('student_id')->unsigned();
+            $table->unsignedInteger('group_id')->unsigned();
+            $table->unsignedTinyInteger('type');
+            $table->unsignedSmallInteger('price');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('levels');
+        Schema::dropIfExists('invoices');
     }
 };

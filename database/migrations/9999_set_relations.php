@@ -30,6 +30,16 @@ return new class extends Migration
             $table->foreign('class_id')->references('id')->on('classes')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('student_id')->references('id')->on('students')->onUpdate('cascade')->onDelete('cascade');
         });
+        Schema::table('other_classes', function (Blueprint $table) {
+            $table->foreign('class_id')->references('id')->on('classes')->onUpdate('cascade')->onDelete('cascade');
+        });
+        Schema::table('monthly_level_prices', function (Blueprint $table) {
+        $table->foreign('level_id')->references('id')->on('levels')->onUpdate('cascade')->onDelete('cascade');
+        });
+        Schema::table('invoices', function (Blueprint $table) {
+        $table->foreign('student_id')->references('id')->on('students')->onUpdate('cascade')->onDelete('cascade');
+        $table->foreign('group_id')->references('id')->on('groups')->onUpdate('cascade')->onDelete('cascade');
+        });
     }
 
     /**

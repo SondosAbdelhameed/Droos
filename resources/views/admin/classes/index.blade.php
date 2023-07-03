@@ -3,9 +3,9 @@
 <!-- Nav Header Component Start -->
 <x-dashboard.base.nav>
     <x-slot:heading>
-       بدأ حصة
-    </x-slot>
-    {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
+        بدأ حصة
+        </x-slot>
+        {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
 </x-dashboard.base.nav>
 <!-- Nav Header Component End -->
 <!--Nav End-->
@@ -33,21 +33,39 @@
                                 <div class="card-body">
                                     {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate, ex ac
                                         venenatis mollis, diam nibh finibus leo</p> --}}
-                                    <form action="{{route('classes.store')}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('classes.store')}}" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <label class="form-label" for="email">المجموعه :</label>
                                             <select class="form-control" name="group_id">
-                                            <option value="">المجموعه</option>
-                                            @foreach ($groups as $group)
-                                            <option value="{{$group->id}}">
-                                                {{$group->name}}
-                                            </option>
-                                            @endforeach
+                                                <option value="">المجموعه</option>
+                                                @foreach ($groups as $group)
+                                                <option value="{{$group->id}}">
+                                                    {{$group->name}}
+                                                </option>
+                                                @endforeach
                                             </select>
                                             @error('group_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-check d-block">
+                                                <input class="form-check-input" type="radio" name="type" value="1"
+                                                    id="type2" checked="">
+                                                <label class="form-check-label" for="type2">
+                                                    حصة عادية
+                                                </label>
+                                            </div>
+                                            <div class="form-check d-block">
+                                                <input class="form-check-input" type="radio" name="type" value="2"
+                                                    id="type2">
+                                                <label class="form-check-label" for="type2">
+                                                    مراجعة
+                                                </label>
+                                            </div>
+                                            <input class="form-control" name="price" value="{{ old('price') }}" placeholder="Price" >
                                         </div>
                                         <button type="submit" class="btn btn-primary">بدأ</button>
                                     </form>

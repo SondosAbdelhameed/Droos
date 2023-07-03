@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\StoreCourseRequest;
 use App\Models\Attendance;
 use App\Models\Classe;
 use App\Models\Group;
+use App\Models\OtherClasse;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
@@ -34,16 +35,29 @@ class ClassController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        
-        $last_class = Classe::where('group_id', $request->group_id)->latest('id')->first();
-        if($last_class->closed_at == null){
-            return redirect()->route('classes.show', $last_class->id);
-        }else{
+        if($request->type ==1)
+        {
+            $last_class = Classe::where('group_id', $request->group_id)->latest('id')->first();
+            if($last_class->closed_at == null){
+                return redirect()->route('classes.show', $last_class->id);
+            }else{
+                $class = new Classe();
+                $class->group_id = $request->group_id;
+                $class->type = $request->type;
+                $class->save();
+                return redirect()->route('classes.show', $class->id);
+            }
+        }elseif($request->type ==2)
+        {
             $class = new Classe();
             $class->group_id = $request->group_id;
+            $class->type = $request->type;
             $class->save();
-            $class_id = $class->id;
-            return redirect()->route('classes.show', $class_id);
+            $other_class = new OtherClasse();
+            $other_class->class_id = $class->id;
+            $other_class->price = $request->price;
+            $other_class->save();
+            return redirect()->route('classes.show', $class->id);
         }
     }
 

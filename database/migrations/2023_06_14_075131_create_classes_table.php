@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('group_id')->unsigned();
             $table->dateTime('closed_at')->nullable();
+            $table->unsignedTinyInteger('type');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

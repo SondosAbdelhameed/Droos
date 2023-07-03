@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->unsignedInteger('group_id')->unsigned();
             $table->string('photo', 100)->nullable();
+            $table->unsignedSmallInteger('dept_class_no');
+            $table->dateTime('end_date');
             $table->boolean('active')->default(0);
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
