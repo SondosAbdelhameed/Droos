@@ -36,14 +36,14 @@
                                     <form action="{{route('levels.update',$level->id)}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('patch')
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label class="form-label" for="email">اسم المجموعه :</label>
                                             <input type="text" class="form-control" placeholder="الاسم" name="name"
                                                 value="{{ $level->name }}" required />
                                             @error('name')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group">
                                             <label class="form-label" for="email">سعر الحصة:</label>
                                             <input type="text" class="form-control" placeholder="السعر" name="one_price"

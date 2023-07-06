@@ -47,11 +47,11 @@
                                             <div class="flex align-items-center list-user-action" style="display: flex;">
                                                 <x-dashboard.a-edit href="{{ route('groups.edit', $group->id) }}">
                                                 </x-dashboard.a-edit>&nbsp;
-                                                <form action="{{ route('groups.destroy', $group->id) }}" method="POST">
+                                                {{-- <form action="{{ route('groups.destroy', $group->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-dashboard.delete-button></x-dashboard.delete-button>
-                                                </form>&nbsp;
+                                                </form>&nbsp; --}}
                                                 <x-dashboard.a-show href="{{ route('groups.show', $group->id) }}" title="عرض الطلاب الخاصة بالمجموعة" >
                                                 </x-dashboard.a-show>
                                             </div>

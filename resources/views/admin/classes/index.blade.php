@@ -60,12 +60,15 @@
                                             </div>
                                             <div class="form-check d-block">
                                                 <input class="form-check-input" type="radio" name="type" value="2"
-                                                    id="type2">
+                                                    id="typetwo">
                                                 <label class="form-check-label" for="type2">
                                                     مراجعة
                                                 </label>
                                             </div>
-                                            <input class="form-control" name="price" value="{{ old('price') }}" placeholder="Price" >
+                                            <div id="block" style="display: none" ;>
+                                                <input class="form-control" name="price" value="{{ old('price') }}"
+                                                    placeholder="السعر">
+                                            </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">بدأ</button>
                                     </form>
@@ -78,5 +81,16 @@
         </div>
     </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+   // start show and hide input
+   $("#type2").click(function(){
+        $("#block").hide(500);
+      });
+   $("#typetwo").click(function(){
+        $("#block").show(500);
+      });
+});
+</script>
 @endsection

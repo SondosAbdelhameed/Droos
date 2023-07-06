@@ -7,8 +7,8 @@
         </x-slot>
         {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
         <x-slot:link>
-            {{ route('courses.create') }}
-            </x-slot>
+            {{-- {{ route('courses.create') }}
+            </x-slot> --}}
 </x-dashboard.base.nav>
 <!-- Nav Header Component End -->
 <!--Nav End-->
@@ -43,11 +43,11 @@
                                             <div class="flex align-items-center list-user-action" style="display: flex;">
                                                 <x-dashboard.a-edit href="{{ route('courses.edit', $course->id) }}">
                                                 </x-dashboard.a-edit>&nbsp;
-                                                <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
+                                                {{-- <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-dashboard.delete-button></x-dashboard.delete-button>
-                                                </form>
+                                                </form> --}}
                                             </div>
                                         </td>
                                     </tr>

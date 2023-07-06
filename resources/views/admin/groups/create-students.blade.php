@@ -3,9 +3,11 @@
 <!-- Nav Header Component Start -->
 <x-dashboard.base.nav>
     <x-slot:heading>
-        المجموعه ({{ $group->name }})
-    </x-slot>
-    {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
+        اسم المجموعه : ({{ $group->name }}) <br>
+        المستوي : ({{ $group->level->name }}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        الماده : ({{ $group->course->name }})
+        </x-slot>
+        {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
 </x-dashboard.base.nav>
 <!-- Nav Header Component End -->
 <!--Nav End-->
@@ -33,9 +35,10 @@
                                 <div class="card-body">
                                     {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate, ex ac
                                         venenatis mollis, diam nibh finibus leo</p> --}}
-                                    <form action="{{route('store_group_students')}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('store_group_students')}}" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden"  name="group_id" value="{{ $group->id }}"/>
+                                        <input type="hidden" name="group_id" value="{{ $group->id }}" />
                                         <div class="form-group">
                                             <label class="form-label" for="email">اسم الطالب :</label>
                                             <input type="text" class="form-control" placeholder="الاسم" name="name"
@@ -52,7 +55,7 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        
+
                                         <div class="form-group">
                                             <label class="form-label">صورة الطالب :</label>
                                             <input type="file" class="form-control" name="photo" accept="image/*">

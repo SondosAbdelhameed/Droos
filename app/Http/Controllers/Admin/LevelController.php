@@ -55,7 +55,7 @@ class LevelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(StoreLevelRequest $request, Level $level)
+    public function update(Request $request, Level $level)
     {
         $level->update($request->all());
         return redirect()->route('levels.index')->with('success', 'Updated Successfully');

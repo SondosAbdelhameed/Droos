@@ -23,46 +23,33 @@
                         </div>
                     </div>
                     <div class="card-body px-0">
-                        <div class="col-sm-12 col-lg-6">
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="header-title">
-                                        <h4 class="card-title">تفاصيل شهر</h4>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate, ex ac
-                                        venenatis mollis, diam nibh finibus leo</p> --}}
-                                    <form action="{{route('level-store-month')}}" method="post" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label class="form-label" for="email">السعر :</label>
-                                            <input type="text" class="form-control" placeholder="السعر" name="price"
-                                                value="{{ $month->price }}" required />
-                                            @error('price')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">تاريخ البدأ :</label>
-                                            <input type="date" class="form-control" name="start_date"
-                                                value="{{ $month->start_date }}" required />
-                                            @error('start_date')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">تاريخ النهاية :</label>
-                                            <input type="date" class="form-control" name="end_date"
-                                                value="{{ $month->end_date }}" required />
-                                            @error('end_date')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">حفظ</button>
-                                    </form>
-                                </div>
-                            </div>
+                        <div class="table-responsive">
+                            <table id="user-list-table" class="table table-striped" role="grid">
+                                <thead>
+                                    <tr class="ligth">
+                                        <td>الشهر</td>
+                                        <th>السعر</th>
+                                        <th>تاريخ البدء</th>
+                                        <th>تاريخ النهاية</th>
+                                        {{-- <th style="min-width: 100px">الإعدادات</th> --}}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $month->start_date->format('M') }}</td>
+                                        <td>{{ $month->price }}</td>
+                                        <td>{{ $month->start_date->format('Y-m-d') }}</td>
+                                        <td>{{ $month->end_date->format('Y-m-d') }}</td>
+                                        {{-- <td>
+                                            <div class="flex align-items-center list-user-action"
+                                                style="display: flex;">
+                                                <x-dashboard.a-edit href="{{ route('levels.edit', $month->id) }}">
+                                                </x-dashboard.a-edit>&nbsp;
+                                            </div>
+                                        </td> --}}
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

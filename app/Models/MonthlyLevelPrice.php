@@ -9,7 +9,7 @@ class MonthlyLevelPrice extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    protected $casts = [ 'start_date'=>'datetime'];
+    protected $casts = [ 'start_date'=>'datetime', 'end_date'=>'datetime'];
     public function level()
     {
         return $this->belongsTo(Level::class);
