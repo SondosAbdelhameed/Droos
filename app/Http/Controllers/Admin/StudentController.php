@@ -93,4 +93,8 @@ class StudentController extends Controller
         $student->delete();
         return redirect()->route('students.index')->with('success', 'Deleted Successfully');
     }
+    public function print_barcode($id){
+		$student = Student::find($id);
+		return view('admin.students.barcode',compact('student'));
+	}
 }

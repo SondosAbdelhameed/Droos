@@ -34,11 +34,22 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+        'group_id'=> 'required',
+        ]);
         // return $request;
         if($request->type ==1)
         {
-            $last_class = Classe::where('group_id', $request->group_id)->latest('id')->first();
-            if($last_class->closed_at == null){
+            $last_class = Classe::where('group_id', $request->group_id)->where('type', 1)->latest('id')->first();
+            if(isset($last_class) == null)
+            {
+                $class = new Classe();
+                $class->group_id = $request->group_id;
+                $class->type = $request->type;
+                $class->save();
+                return redirect()->route('classes.show', $class->id);
+            }
+            elseif(isset($last_class->closed_at) == null){
                 return redirect()->route('classes.show', $last_class->id);
             }else{
                 $class = new Classe();

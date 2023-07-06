@@ -31,6 +31,7 @@
                                     <tr class="ligth">
                                         <th class="text-center">#</th>
                                         <th>اسم المستوي</th>
+                                        <th>سعر المستوي</th>
                                         <th>الشهور</th>
                                         <th style="min-width: 100px">الإعدادات</th>
                                     </tr>
@@ -40,6 +41,7 @@
                                     <tr>
                                         <td class="text-center">{{ $index+1 }}</td>
                                         <td>{{ $level->name }}</td>
+                                        <td>{{ $level->one_price }}</td>
                                         <td>
                                             <div class="iq-media-group iq-media-group-1">
                                                 @foreach ($level->monthlyLevelPrices as $month)
@@ -54,11 +56,11 @@
                                                 style="display: flex;">
                                                 <x-dashboard.a-edit href="{{ route('levels.edit', $level->id) }}">
                                                 </x-dashboard.a-edit>&nbsp;
-                                                <form action="{{ route('levels.destroy', $level->id) }}" method="POST">
+                                                {{-- <form action="{{ route('levels.destroy', $level->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-dashboard.delete-button></x-dashboard.delete-button>
-                                                </form>&nbsp;
+                                                </form>&nbsp; --}}
                                                 <a class="btn btn-sm btn-icon btn-success"
                                                     href="{{ route('level-create-month', $level->id) }}"
                                                     title="اضافة شهر جديد">

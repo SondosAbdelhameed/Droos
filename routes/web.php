@@ -41,9 +41,9 @@ Route::group(
             Route::post('level-store-month', [LevelController::class, 'storeMonth'])->name('level-store-month');
             Route::get('month-details/{id}', [LevelController::class, 'monthDetails'])->name('month-details');
             
-            
             Route::resource('courses', CourseController::class);
             Route::resource('students', StudentController::class);
+            Route::get('printbarcode/{id}', [StudentController::class, 'print_barcode'])->name('printbarcode');
             
             Route::resource('classes', ClassController::class);
             Route::get('end-class/{id}', [ClassController::class, 'endClass'])->name('end-class');
