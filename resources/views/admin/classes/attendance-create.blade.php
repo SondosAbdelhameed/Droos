@@ -17,7 +17,29 @@
 </div>
 {{-- content --}}
 <div class="conatiner-fluid content-inner mt-n5 py-0">
+     {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    Open modal
+  </button> --}}
+      @if(Session::has('paymentshowdialog'))
+        <script>
+        $(function() {
+            $('#myModal').modal('show');
+        });
+      </script>
+        @endif
+    @include('admin.classes.paymentmodal')
+    @if(Session::has('payment'))
+        <script>
+        $(function() {
+            $('#PayModal').modal('show');
+        });
+      </script>
+        @endif
+    @include('admin.classes.paymodal')
     <div>
+    
+
+
         <div class="row">
             <div class="col-xl-3 col-lg-4">
                 <div class="card">
@@ -27,12 +49,8 @@
                         </div>
                     </div>
                     <hr class="hr-horizontal">
-                    <div class="card-body" style="
-    max-height: 50%;
-">
-                        <div class="table-responsive" style="
-    max-height: 30%;
-">
+                    <div class="card-body" style="max-height: 50%;">
+                        <div class="table-responsive" style="max-height: 30%;">
                             <table id="user-list-table" class="table table-striped" role="grid">
                                 <thead>
                                     <tr class="ligth">
