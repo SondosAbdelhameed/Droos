@@ -101,4 +101,8 @@ class GroupController extends Controller
             request()->photo->move(public_path($path), $file);
         return $file;
     }
+    public function printAllBarcode($id){
+		$students = Student::where('group_id', $id)->get();
+		return view('admin.students.barcodelist',compact('students'));
+	}
 }

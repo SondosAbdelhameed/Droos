@@ -43,7 +43,8 @@ Route::group(
             
             Route::resource('courses', CourseController::class);
             Route::resource('students', StudentController::class);
-            Route::get('printbarcode/{id}', [StudentController::class, 'print_barcode'])->name('printbarcode');
+            Route::get('printbarcode/{id}', [StudentController::class, 'printBarcode'])->name('printbarcode');
+            Route::get('printallbarcode/{id}', [GroupController::class, 'printAllBarcode'])->name('printallbarcode');
             
             Route::resource('classes', ClassController::class);
             Route::get('end-class/{id}', [ClassController::class, 'endClass'])->name('end-class');
