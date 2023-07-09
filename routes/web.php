@@ -49,6 +49,12 @@ Route::group(
             Route::resource('classes', ClassController::class);
             Route::get('end-class/{id}', [ClassController::class, 'endClass'])->name('end-class');
             Route::resource('attendances', AttendanceController::class);
+            Route::post('attend-and-skip', [AttendanceController::class, 'attendAndSkip'])->name('attend-and-skip');
+            Route::post('pay-and-attend', [AttendanceController::class, 'payAndAttend'])->name('pay-and-attend');
+            Route::post('pay-per-class', [AttendanceController::class, 'payPerClass'])->name('pay-per-class');
+            Route::post('pay-per-month', [AttendanceController::class, 'payPerMonth'])->name('pay-per-month');
+            
+            
             
     }
 );
