@@ -62,7 +62,7 @@
                                                 </option>
                                                 @endforeach
                                             </select>
-                                            @error('phone')
+                                            @error('level_id')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
