@@ -20,6 +20,9 @@ return new class extends Migration
             $table->foreign('level_id')->references('id')->on('levels')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('course_id')->references('id')->on('courses')->onUpdate('cascade')->onDelete('cascade');
         });
+        Schema::table('students', function (Blueprint $table) {
+            $table->foreign('level_id')->references('id')->on('levels')->onUpdate('cascade')->onDelete('cascade');
+        });
         Schema::table('student_groups', function (Blueprint $table) {
             $table->foreign('student_id')->references('id')->on('students')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('group_id')->references('id')->on('groups')->onUpdate('cascade')->onDelete('cascade');

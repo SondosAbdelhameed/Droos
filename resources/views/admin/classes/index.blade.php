@@ -66,7 +66,7 @@
                                                 </label>
                                             </div>
                                             <div id="block" style="display: none" ;>
-                                                <input class="form-control" name="price" value="{{ old('price') }}"
+                                                <input type="number" class="form-control" name="price" value="{{ old('price') }}"
                                                     placeholder="السعر">
                                             </div>
                                         </div>

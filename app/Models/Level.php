@@ -9,6 +9,10 @@ class Level extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
     public function groups()
     {
         return $this->hasMany(Group::class);

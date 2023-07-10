@@ -3,7 +3,7 @@
 <!-- Nav Header Component Start -->
 <x-dashboard.base.nav>
     <x-slot:heading>
-        الطلاب
+        اضافة طالب
         </x-slot>
         {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
 </x-dashboard.base.nav>
@@ -27,15 +27,15 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
-                                        <h4 class="card-title">اضافة طالب</h4>
+                                        <h4 class="card-title">بيانات الطالب</h4>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate, ex ac
-                                        venenatis mollis, diam nibh finibus leo</p> --}}
                                     <form action="{{route('students.store')}}" method="post"
                                         enctype="multipart/form-data">
                                         @csrf
+                                <div class="card-body">
+                                    {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate, ex ac
+                                        venenatis mollis, diam nibh finibus leo</p> --}}
                                         <div class="form-group">
                                             <label class="form-label" for="email">اسم الطالب :</label>
                                             <input type="text" class="form-control" placeholder="الاسم" name="name"
@@ -52,11 +52,40 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            <label class="form-label" for="email"> المستوي :</label>
+                                            <select class="form-control" name="level_id">
+                                                <option value="">المستوي</option>
+                                                @foreach ($levels as $level)
+                                                <option value="{{$level->id}}">
+                                                    {{$level->name}}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @error('phone')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">صورة الطالب :</label>
+                                            <input type="file" class="form-control" name="photo" accept="image/*">
+                                        </div>
+                                        
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title">المجموعات :</h4>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="new-user-info">
                                         @foreach ($courses as $course)
                                         <div class="form-group">
-                                            <label class="form-label">{{ $course->name }}</label>
+                                            <label class="form-label">مادة {{ $course->name }}</label>
                                             <select class="form-control" name="group_id[]">
-                                                <option value="">المجموعه</option>
+                                                <option value="" selected disabled>المجموعه</option>
                                                 @foreach ($course->groups as $group)
                                                 <option value="{{$group->id}}">
                                                     {{$group->name}}
@@ -65,14 +94,11 @@
                                             </select>
                                         </div>
                                         @endforeach
-                                        <div class="form-group">
-                                            <label class="form-label">صورة الطالب :</label>
-                                            <input type="file" class="form-control" name="photo" accept="image/*">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">حفظ</button>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
+                            <button type="submit" class="btn btn-primary">حفظ</button>
+                                    </form>
                         </div>
                     </div>
                 </div>

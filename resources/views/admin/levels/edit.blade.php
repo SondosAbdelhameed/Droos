@@ -34,17 +34,9 @@
                                     <form action="{{route('levels.update',$level->id)}}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('patch')
-                                        {{-- <div class="form-group">
-                                            <label class="form-label" for="email">اسم المجموعه :</label>
-                                            <input type="text" class="form-control" placeholder="الاسم" name="name"
-                                                value="{{ $level->name }}" required />
-                                            @error('name')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div> --}}
                                         <div class="form-group">
                                             <label class="form-label" for="email">سعر الحصة:</label>
-                                            <input type="text" class="form-control" placeholder="السعر" name="one_price"
+                                            <input type="number" class="form-control" placeholder="السعر" name="one_price"
                                                 value="{{ $level->one_price }}" required />
                                             @error('one_price')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -85,7 +77,7 @@
                                         <input type="hidden" name="level_id" value="{{ $level->id }}">
                                         <div class="form-group">
                                             <label class="form-label" for="email">السعر :</label>
-                                            <input type="text" class="form-control" placeholder="السعر" name="price"
+                                            <input type="number" class="form-control" placeholder="السعر" name="price"
                                                 value="{{ old('price') }}" required />
                                             @error('price')
                                             <div class="alert alert-danger">{{ $message }}</div>
@@ -124,12 +116,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($monthes as $index=>$month)
                                      <tr>
-                                        <td>1</td>
-                                        <td>150</td>
-                                        <td>1-9-2023</td>
-                                        <td>30-9-2023</td>
+                                        <td>{{ $index+1 }}</td>
+                                        <td>{{ $month->price }}</td>
+                                        <td>{{ $month->start_date->format('Y/m/d') }}</td>
+                                        <td>{{ $month->end_date->format('Y/m/d') }}</td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 

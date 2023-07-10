@@ -28,7 +28,8 @@ class StudentController extends Controller
     public function create()
     {
         $courses = Course::with('groups')->get();
-        return view('admin.students.create', compact('courses'));
+        $levels = Level::get();
+        return view('admin.students.create', compact('courses', 'levels'));
     }
 
     /**
@@ -40,6 +41,7 @@ class StudentController extends Controller
         $student->barcode = rand(1000, 100000);
         $student->name = $request->name;
         $student->phone = $request->phone;
+        $student->level_id = $request->level_id;
         if (request()->photo) {
             $student->photo = $this->save_image($request->photo, $student->image);
         }

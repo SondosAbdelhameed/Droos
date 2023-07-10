@@ -49,7 +49,9 @@ class LevelController extends Controller
      */
     public function edit(Level $level)
     {
-        return view('admin.levels.edit', compact('level'));
+        // return $level;
+        $monthes = MonthlyLevelPrice::where('level_id', $level->id)->get();
+        return view('admin.levels.edit', compact('level','monthes'));
     }
 
     /**
@@ -69,18 +71,9 @@ class LevelController extends Controller
         $level->delete();
         return redirect()->route('levels.index')->with('success', 'Deleted Successfully');
     }
-    public function createMonth($id)
-    {
-        return view('admin.levels.create-month', compact('id'));
-    }
     public function storeMonth(Request $request)
     {
         MonthlyLevelPrice::create($request->all());
         return redirect()->route('levels.index')->with('success', 'Added Successfully');
-    }
-    public function monthDetails($id)
-    {
-        $month = MonthlyLevelPrice::find($id);
-        return view('admin.levels.month-details', compact('month'));
     }
 }
