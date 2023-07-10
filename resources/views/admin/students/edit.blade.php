@@ -54,33 +54,41 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
+                                            <label class="form-label" for="email"> المستوي :</label>
+                                            <select class="form-control" name="level_id">
+                                                <option value="">المستوي</option>
+                                                @foreach ($levels as $level)
+                                                <option value="{{$level->id}}" {{($student->level_id ==
+                                                    $level->id)?'selected':''}}>
+                                                    {{$level->name}}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                            @error('level_id')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
                                             <label class="form-label">صورة الطالب :</label>
+                                            <div class="row">
+                                                <div class="col">
                                             <input type="file" class="form-control" name="photo" accept="image/*">
+                                                </div>
+                                                <div class="col-3">
+                                            @if(!empty($student->photo))
+                                            <img src="{{url($student->image)}}/{{$student->photo }}" class="w3-round"
+                                                width="100px" alt="Norway">
+                                            @else
+                                            <img src="{{url('/data/error.png')}}" class="w3-round" width="100px"
+                                                alt="Norway">
+                                            @endif
+                                            </div>
+                                            </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">حفظ</button>
                                     </form>
                                 </div>
                             </div>
-                            {{-- start card for show photos --}}
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between">
-                                    <div class="header-title">
-                                        <h4 class="card-title">صورة الطالب</h4>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        @if(!empty($student->photo))
-                                        <img src="{{url($student->image)}}/{{$student->photo }}" class="w3-round"
-                                            width="150px" alt="Norway">
-                                        @else
-                                        <img src="{{url('/data/error.png')}}" class="w3-round" width="100px"
-                                            alt="Norway">
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- end card for show photos --}}
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
@@ -89,43 +97,28 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        {{-- @foreach ($courses as $course)
-                                        <div class="form-group">
-                                            <label class="form-label">{{ $course->name }}</label>
-                                        <select class="form-control" name="group_id[]">
-                                            <option value="">المجموعه</option>
-                                            @foreach ($course->groups as $group)
-                                            <option value="{{$group->id}}" @foreach ($group->studentGroups as
-                                                $student_group)
-                                                {{($student_group->group_id == $group->id)?'selected':''}}
-                                                @endforeach>
-                                                {{$group->name}}
-                                            </option>
-                                            @endforeach
-                                        </select>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>الماده</th>
+                                                    <th>المجموعه</th>
+                                                    {{-- <th>اعدادات</th> --}}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($courses as $course)
+                                                <tr>
+                                                    <td>{{ $course->name }}</td>
+                                                    @if (count($course->groups) > 0)
+                                                    <td>{{$course->groups[0]->name}}</td>
+                                                    @else
+                                                    <td>-</td>
+                                                    @endif
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    @endforeach --}}
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>الماده</th>
-                                                <th>المجموعه</th>
-                                                {{-- <th>اعدادات</th> --}}
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($courses as $course)
-                                            <tr>
-                                                <td>{{ $course->name }}</td>
-                                                @if (count($course->groups) > 0)
-                                                <td>{{$course->groups[0]->name}}</td>
-                                                @else
-                                                <td>-</td>
-                                                @endif
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -134,7 +127,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 @endsection

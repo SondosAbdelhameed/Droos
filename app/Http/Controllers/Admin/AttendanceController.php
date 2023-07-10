@@ -35,18 +35,14 @@ class AttendanceController extends Controller
     public function store(Request $request)
     {
         $student = Student::where('barcode', $request->barcode)->first();
-        // $student_group = StudentGroup::where('student_id', $student->id)->where('group_id', $request->group_id)->first();
-        if ($student->end_date == null && $student->end_date <= now() )
+        $student_group = StudentGroup::where('student_id', $student->id)->where('group_id', $request->group_id)->first();
+        if ($student_group->end_date == null && $student_group->end_date <= now() )
         {
-            return redirect()->back()->with(['paymentshowdialog'=> 'not paid', 'student_id' => $student->id, 'class_id' => $request->class_id ]);
+            return redirect()->back()->with(['paymentshowdialog'=> 'not paid', 'student_id' => $student_group->id, 'class_id' => $request->class_id, 'group_id' => $request->group_id ]);
         }else{
-            Attendance::create(['student_id' => $student->id, 'class_id' => $request->class_id]);
+            Attendance::create(['student_id' => $student_group->id, 'class_id' => $request->class_id]);
             return redirect()->back()->with('success', 'Added Successfully');
         }
-    }
-    public function attend()
-    {
-        
     }
 
     /**
@@ -81,7 +77,8 @@ class AttendanceController extends Controller
     }
     public function attendAndSkip(Request $request)
     {
-        $student = Student::find($request->id);
+        // return $request;
+        $student = StudentGroup::where('student_id', $request->student_id)->where('group_id', $request->group_id)->first();
         Attendance::create(['student_id' => $student->id, 'class_id' => $request->class_id]);
         // increase value for student class
         $student->dept_class_no = $student->dept_class_no + 1;

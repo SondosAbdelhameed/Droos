@@ -17,14 +17,16 @@
             <div class="modal-footer">
                 <form action="{{route('attend-and-skip')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" value="{{ Session::get( 'student_id' ) }}" name="id">
+                    <input type="hidden" value="{{ Session::get( 'student_id' ) }}" name="student_id">
                     <input type="hidden" value="{{ Session::get( 'class_id' ) }}" name="class_id">
+                    <input type="hidden" value="{{ Session::get( 'group_id' ) }}" name="group_id">
                      <button type="submit" class="btn btn-warning">حضور وتخطي</button>
                 </form>
                 <form action="{{route('pay-and-attend')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" value="{{ Session::get( 'student_id' ) }}" name="id">
+                    <input type="hidden" value="{{ Session::get( 'student_id' ) }}" name="student_id">
                     <input type="hidden" value="{{ Session::get( 'class_id' ) }}" name="class_id">
+                    <input type="hidden" value="{{ Session::get( 'group_id' ) }}" name="group_id">
                      <button type="submit" class="btn btn-success">دفع وحضور</button>
                 </form>
             </div>

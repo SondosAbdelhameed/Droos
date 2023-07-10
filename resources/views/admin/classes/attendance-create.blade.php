@@ -84,6 +84,7 @@
                             <form action="{{route('attendances.store')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" value="{{ $id }}" name="class_id">
+                                <input type="hidden" value="{{ $class->group_id }}" name="group_id">
                                 <div class="form-group">
                                     <label class="form-label" for="email">الطالب :</label>
                                     <input type="text" class="form-control" placeholder="الباركود" name="barcode"
