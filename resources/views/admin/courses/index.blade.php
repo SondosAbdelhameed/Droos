@@ -31,7 +31,7 @@
                                     <tr class="ligth">
                                         <th class="text-center">#</th>
                                         <th>اسم المادة</th>
-                                        <th style="min-width: 100px">الإعدادات</th>
+                                        {{-- <th style="min-width: 100px">الإعدادات</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,17 +39,17 @@
                                     <tr>
                                         <td class="text-center">{{ $index+1 }}</td>
                                         <td>{{ $course->name }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <div class="flex align-items-center list-user-action" style="display: flex;">
                                                 <x-dashboard.a-edit href="{{ route('courses.edit', $course->id) }}">
                                                 </x-dashboard.a-edit>&nbsp;
-                                                {{-- <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
+                                                <form action="{{ route('courses.destroy', $course->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <x-dashboard.delete-button></x-dashboard.delete-button>
-                                                </form> --}}
+                                                </form>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

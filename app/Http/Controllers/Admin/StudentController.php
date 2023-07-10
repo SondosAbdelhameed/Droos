@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\Group;
 use App\Models\Level;
 use App\Models\Student;
+use App\Models\StudentGroup;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -26,8 +27,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        $groups = Group::get();
-        return view('admin.students.create', compact('groups'));
+        $courses = Course::with('groups')->get();
+        return view('admin.students.create', compact('courses'));
     }
 
     /**
@@ -39,11 +40,14 @@ class StudentController extends Controller
         $student->barcode = rand(1000, 100000);
         $student->name = $request->name;
         $student->phone = $request->phone;
-        $student->group_id = $request->group_id;
         if (request()->photo) {
             $student->photo = $this->save_image($request->photo, $student->image);
         }
         $student->save();
+         $countItems = count($request->group_id);
+        for ($i = 0; $i < $countItems; $i++) {
+            StudentGroup::create(['student_id' => $student->id, 'group_id' => $request->group_id[$i]]);
+        }
         return redirect()->route('students.index')->with('success', 'Added Successfully');
     }
     public function save_image($filename ,$path)
@@ -66,8 +70,11 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        $groups = Group::get();
-        return view('admin.students.edit', compact('student', 'groups'));
+        // return $student;
+        // $groups = Group::all();
+        $courses = Course::with('groups')->get();
+        $student_groups = StudentGroup::where('student_id', $student->id)->get();
+        return view('admin.students.edit', compact('student', 'student_groups','courses'));
     }
 
     /**
@@ -75,13 +82,15 @@ class StudentController extends Controller
      */
     public function update(StoreStudentRequest $request, Student $student)
     {
+        return $request;
         $student->name = $request->name;
         $student->phone = $request->phone;
-        $student->group_id = $request->group_id;
         if (request()->photo) {
             $student->photo = $this->save_image($request->photo, $student->image);
         }
         $student->save();
+     return   $student_group = StudentGroup::where('student_id', $student->id)->get();
+        
         return redirect()->route('students.index')->with('success', 'Updated Successfully');
     }
 

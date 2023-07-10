@@ -34,9 +34,8 @@
                                         <th>رقم الطالب</th>
                                         <th>اسم الطالب</th>
                                         <th>الهاتف</th>
-                                        <th>المجموعه</th>
-                                        <th>المستوي</th>
-                                        <th>المادة</th>
+                                        {{-- <th>المستوي</th> --}}
+                                        {{-- <th>المادة</th> --}}
                                         <th style="min-width: 100px">الإعدادات</th>
                                     </tr>
                                 </thead>
@@ -47,9 +46,8 @@
                                         <td>{{ $student->barcode }}</td>
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->phone }}</td>
-                                        <td>{{ $student->group->name }}</td>
-                                        <td>{{ $student->group->level->name }}</td>
-                                        <td>{{ $student->group->course->name }}</td>
+                                        {{-- <td>{{ $student->group->level->name }}</td> --}}
+                                        {{-- <td>{{ $student->group->course->name }}</td> --}}
                                         <td>
                                             <div class="flex align-items-center list-user-action"
                                                 style="display: flex;">

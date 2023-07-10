@@ -53,21 +53,19 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        @foreach ($courses as $course)
                                         <div class="form-group">
-                                            <label class="form-label" for="email">المجموعه :</label>
-                                            <select class="form-control" name="group_id">
+                                            <label class="form-label">{{ $course->name }}</label>
+                                            <select class="form-control" name="group_id[]">
                                                 <option value="">المجموعه</option>
-                                                @foreach ($groups as $group)
-                                                <option value="{{$group->id}}" {{($student->group_id ==
-                                                    $group->id)?'selected':''}}>
+                                                @foreach ($course->groups as $group)
+                                                <option value="{{$group->id}}" @foreach ($group->studentGroups as $student_group) {{($student_group->group_id == $group->id)?'selected':''}} @endforeach>
                                                     {{$group->name}}
                                                 </option>
                                                 @endforeach
                                             </select>
-                                            @error('group_id')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
                                         </div>
+                                        @endforeach
                                         <div class="form-group">
                                             <label class="form-label">صورة الطالب :</label>
                                             <input type="file" class="form-control" name="photo" accept="image/*">
