@@ -24,7 +24,8 @@ class StoreStudentRequest extends FormRequest
         return [
             'name'=> 'required|max:100',
             'phone' => 'required|max:20',
-            'group_id' => 'required'
+            'group_id' => 'required',
+            'level_id' => 'required'
         ];
     }
 }
