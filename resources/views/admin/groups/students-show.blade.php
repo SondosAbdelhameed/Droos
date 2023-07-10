@@ -49,8 +49,8 @@
                                         <td>
                                             <div class="flex align-items-center list-user-action"
                                                 style="display: flex;">
-                                                <x-dashboard.a-edit href="{{ route('students.edit', $student->id) }}">
-                                                </x-dashboard.a-edit>&nbsp;
+                                                {{-- <x-dashboard.a-edit href="{{ route('students.edit', $student->id) }}">
+                                                </x-dashboard.a-edit>&nbsp; --}}
                                                 {{-- <form action="{{ route('students.destroy', $student->id) }}"
                                                     method="POST">
                                                     @csrf

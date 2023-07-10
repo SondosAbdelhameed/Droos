@@ -20,4 +20,8 @@ class Student extends Model
     {
         return $this->hasMany(Group::class);
     }
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
+    }
 }

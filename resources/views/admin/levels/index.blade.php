@@ -42,8 +42,12 @@
                                         <td class="text-center">{{ $index+1 }}</td>
                                         <td>{{ $level->name }}</td>
                                         <td>{{ $level->one_price }} ج</td>
-                                        <td>
-                                            150 ج
+                                       <td>
+                                        @foreach ($level->monthlyLevelPrices as $month)
+                                       @if ($loop->last)
+                                            {{ $month->price }} ج
+                                            @endif
+                                        @endforeach
                                         </td>
                                         <td>
                                             <div class="flex align-items-center list-user-action"

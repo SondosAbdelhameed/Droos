@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('barcode');
             $table->string('name',100);
             $table->string('phone', 20);
+            $table->unsignedInteger('level_id')->unsigned();
             $table->string('photo', 100)->nullable();
             $table->boolean('active')->default(0);
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
