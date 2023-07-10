@@ -72,12 +72,13 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
+        $levels = Level::get();
         $student->loadMissing('groups');
         $student_group_id = $student->groups->pluck('id');
         $courses = Course::all();
         $courses->load(['groups' => fn ($query) => $query->whereIn('id', $student_group_id) ]);
     
-        return view('admin.students.edit', compact('student','courses'));
+        return view('admin.students.edit', compact('student', 'courses', 'levels'));
     }
 
     /**
@@ -85,14 +86,12 @@ class StudentController extends Controller
      */
     public function update(StoreStudentRequest $request, Student $student)
     {
-        return $request;
         $student->name = $request->name;
         $student->phone = $request->phone;
         if (request()->photo) {
             $student->photo = $this->save_image($request->photo, $student->image);
         }
         $student->save();
-     return   $student_group = StudentGroup::where('student_id', $student->id)->get();
         
         return redirect()->route('students.index')->with('success', 'Updated Successfully');
     }
