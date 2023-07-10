@@ -1,7 +1,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Droos App</title>
+        <title>منصـــــة دروس - نظــــــــــــــــــــام متكامــــــــــــل لمتابعــــــــــة الطلاب</title>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="{{url('assets/admin/images/favicon.ico')}}" />
@@ -23,4 +23,13 @@
 
         <!-- Customizer Css -->
         <link rel="stylesheet" href="{{url('assets/admin/css/customizer.min.css')}}" />
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tajawal">
+
+        <style>
+             body , h1, h2, h3, h4, h5, h6, p, label {
+                font-family: 'Tajawal', sans-serif;
+            }
+
+        </style>
     </head>
