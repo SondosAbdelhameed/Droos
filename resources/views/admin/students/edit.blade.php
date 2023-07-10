@@ -53,19 +53,6 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                        @foreach ($courses as $course)
-                                        <div class="form-group">
-                                            <label class="form-label">{{ $course->name }}</label>
-                                            <select class="form-control" name="group_id[]">
-                                                <option value="">المجموعه</option>
-                                                @foreach ($course->groups as $group)
-                                                <option value="{{$group->id}}" @foreach ($group->studentGroups as $student_group) {{($student_group->group_id == $group->id)?'selected':''}} @endforeach>
-                                                    {{$group->name}}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        @endforeach
                                         <div class="form-group">
                                             <label class="form-label">صورة الطالب :</label>
                                             <input type="file" class="form-control" name="photo" accept="image/*">
@@ -94,12 +81,60 @@
                                 </div>
                             </div>
                             {{-- end card for show photos --}}
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between">
+                                    <div class="header-title">
+                                        <h4 class="card-title"> المجموعات :</h4>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        {{-- @foreach ($courses as $course)
+                                        <div class="form-group">
+                                            <label class="form-label">{{ $course->name }}</label>
+                                        <select class="form-control" name="group_id[]">
+                                            <option value="">المجموعه</option>
+                                            @foreach ($course->groups as $group)
+                                            <option value="{{$group->id}}" @foreach ($group->studentGroups as
+                                                $student_group)
+                                                {{($student_group->group_id == $group->id)?'selected':''}}
+                                                @endforeach>
+                                                {{$group->name}}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    @endforeach --}}
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>الماده</th>
+                                                <th>المجموعه</th>
+                                                {{-- <th>اعدادات</th> --}}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($courses as $course)
+                                            <tr>
+                                                <td>{{ $course->name }}</td>
+                                                @if (count($course->groups) > 0)
+                                                <td>{{$course->groups[0]->name}}</td>
+                                                @else
+                                                <td>-</td>
+                                                @endif
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 @endsection

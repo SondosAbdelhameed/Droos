@@ -72,11 +72,12 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        // return $student;
-        // $groups = Group::all();
-        $courses = Course::with('groups')->get();
-        $student_groups = StudentGroup::where('student_id', $student->id)->get();
-        return view('admin.students.edit', compact('student', 'student_groups','courses'));
+        $student->loadMissing('groups');
+        $student_group_id = $student->groups->pluck('id');
+        $courses = Course::all();
+        $courses->load(['groups' => fn ($query) => $query->whereIn('id', $student_group_id) ]);
+    
+        return view('admin.students.edit', compact('student','courses'));
     }
 
     /**
