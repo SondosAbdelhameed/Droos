@@ -8,9 +8,9 @@
         الماده : ({{ $group->course->name }})
         </x-slot>
         {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
-        <x-slot:link>
+        {{-- <x-slot:link>
             {{ route('create_group_students', $group->id) }}
-            </x-slot>
+            </x-slot> --}}
 </x-dashboard.base.nav>
 <!-- Nav Header Component End -->
 <!--Nav End-->
@@ -43,9 +43,9 @@
                                     @foreach($students as $index=>$student)
                                     <tr>
                                         <td class="text-center">{{ $index+1 }}</td>
-                                        <td>{{ $student->barcode }}</td>
-                                        <td>{{ $student->name }}</td>
-                                        <td>{{ $student->phone }}</td>
+                                        <td>{{ $student->student->barcode }}</td>
+                                        <td>{{ $student->student->name }}</td>
+                                        <td>{{ $student->student->phone }}</td>
                                         <td>
                                             <div class="flex align-items-center list-user-action"
                                                 style="display: flex;">

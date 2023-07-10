@@ -8,6 +8,7 @@ use App\Models\Classe;
 use App\Models\Group;
 use App\Models\MonthlyLevelPrice;
 use App\Models\Student;
+use App\Models\StudentGroup;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -34,6 +35,7 @@ class AttendanceController extends Controller
     public function store(Request $request)
     {
         $student = Student::where('barcode', $request->barcode)->first();
+        // $student_group = StudentGroup::where('student_id', $student->id)->where('group_id', $request->group_id)->first();
         if ($student->end_date == null && $student->end_date <= now() )
         {
             return redirect()->back()->with(['paymentshowdialog'=> 'not paid', 'student_id' => $student->id, 'class_id' => $request->class_id ]);

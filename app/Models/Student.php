@@ -12,12 +12,12 @@ class Student extends Model
     {
         return 'data/dashboard/students';
     }
-    public function group()
-    {
-        return $this->belongsTo(Group::class);
-    }
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
+    }
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
     }
 }

@@ -3,9 +3,9 @@
 <!-- Nav Header Component Start -->
 <x-dashboard.base.nav>
     <x-slot:heading>
-       الطلاب
-    </x-slot>
-    {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
+        الطلاب
+        </x-slot>
+        {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
 </x-dashboard.base.nav>
 <!-- Nav Header Component End -->
 <!--Nav End-->
@@ -33,7 +33,8 @@
                                 <div class="card-body">
                                     {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vulputate, ex ac
                                         venenatis mollis, diam nibh finibus leo</p> --}}
-                                    <form action="{{route('students.store')}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('students.store')}}" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group">
                                             <label class="form-label" for="email">اسم الطالب :</label>
@@ -51,20 +52,19 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+                                        @foreach ($courses as $course)
                                         <div class="form-group">
-                                            <label class="form-label" for="email">المجموعه :</label>
-                                            <select class="form-control" name="group_id">
-                                            <option value="">المجموعه</option>
-                                            @foreach ($groups as $group)
-                                            <option value="{{$group->id}}">
-                                                {{$group->name}}
-                                            </option>
-                                            @endforeach
+                                            <label class="form-label">{{ $course->name }}</label>
+                                            <select class="form-control" name="group_id[]">
+                                                <option value="">المجموعه</option>
+                                                @foreach ($course->groups as $group)
+                                                <option value="{{$group->id}}">
+                                                    {{$group->name}}
+                                                </option>
+                                                @endforeach
                                             </select>
-                                            @error('group_id')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
                                         </div>
+                                        @endforeach
                                         <div class="form-group">
                                             <label class="form-label">صورة الطالب :</label>
                                             <input type="file" class="form-control" name="photo" accept="image/*">

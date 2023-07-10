@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('student_groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('barcode');
-            $table->string('name',100);
-            $table->string('phone', 20);
-            $table->string('photo', 100)->nullable();
-            $table->boolean('active')->default(0);
+            $table->unsignedInteger('student_id')->unsigned();
+            $table->unsignedInteger('group_id')->unsigned();
+            $table->unsignedSmallInteger('dept_class_no')->default(0);
+            $table->dateTime('end_date')->nullable();
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('student_groups');
     }
 };

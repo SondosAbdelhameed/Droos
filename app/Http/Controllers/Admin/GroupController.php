@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Group;
 use App\Models\Level;
 use App\Models\Student;
+use App\Models\StudentGroup;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -46,7 +47,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        $students = Student::where('group_id', $group->id)->paginate(config('admin.pagination'));
+        $students = StudentGroup::where('group_id', $group->id)->paginate(config('admin.pagination'));
         return view('admin.groups.students-show', compact('students', 'group'));
     }
 

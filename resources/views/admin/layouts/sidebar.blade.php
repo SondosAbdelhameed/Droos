@@ -37,7 +37,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if (Route::is('dashboard') ) active @endif" aria-current="page" href="{{ route('dashboard') }}">
+                    <a class="nav-link @if (Route::is('dashboard') ) active @endif" aria-current="page"
+                        href="{{ route('dashboard') }}">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path opacity="0.4"
@@ -61,7 +62,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(Route::is('levels.index') ) active @endif" href="{{ route('levels.index') }}">
+                    <a class="nav-link @if(Route::is('levels.index') ) active @endif"
+                        href="{{ route('levels.index') }}">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -73,7 +75,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(Route::is('courses.index') ) active @endif" href="{{ route('courses.index') }}">
+                    <a class="nav-link @if(Route::is('courses.index') ) active @endif"
+                        href="{{ route('courses.index') }}">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path opacity="0.4"
@@ -92,7 +95,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(Route::is('groups.index') ) active @endif" href="{{ route('groups.index') }}">
+                    <a class="nav-link @if(Route::is('groups.index') ) active @endif"
+                        href="{{ route('groups.index') }}">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -104,7 +108,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(Route::is('students.index') ) active @endif" href="{{ route('students.index') }}">
+                    <a class="nav-link @if(Route::is('students.index') ) active @endif"
+                        href="{{ route('students.index') }}">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -119,7 +124,8 @@
                     <hr class="hr-horizontal">
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link @if(Route::is('classes.index') ) active @endif" href="{{ route('classes.index') }}">
+                    <a class="nav-link @if(Route::is('classes.index') ) active @endif"
+                        href="{{ route('classes.index') }}">
                         <i class="icon">
                             <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -137,17 +143,24 @@
                 <li>
                     <hr class="hr-horizontal">
                 </li>
-
                 <li class="nav-item">
-                    <a class="nav-link @if(Route::is('classes.index') ) active @endif" href="#">
-                        <i class="icon">
-                            <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path opacity="0.4" d="M2 6.447C2 3.996 4.03024 2 6.52453 2H11.4856C13.9748 2 16 3.99 16 6.437V17.553C16 20.005 13.9698 22 11.4744 22H6.51537C4.02515 22 2 20.01 2 17.563V16.623V6.447Z" fill="currentColor"></path>
-                                <path d="M21.7787 11.4548L18.9329 8.5458C18.6388 8.2458 18.1655 8.2458 17.8723 8.5478C17.5802 8.8498 17.5811 9.3368 17.8743 9.6368L19.4335 11.2298H17.9386H9.54826C9.13434 11.2298 8.79834 11.5748 8.79834 11.9998C8.79834 12.4258 9.13434 12.7698 9.54826 12.7698H19.4335L17.8743 14.3628C17.5811 14.6628 17.5802 15.1498 17.8723 15.4518C18.0194 15.6028 18.2113 15.6788 18.4041 15.6788C18.595 15.6788 18.7868 15.6028 18.9329 15.4538L21.7787 12.5458C21.9199 12.4008 21.9998 12.2048 21.9998 11.9998C21.9998 11.7958 21.9199 11.5998 21.7787 11.4548Z" fill="currentColor"></path>
-                            </svg>
-                        </i>
-                        <span class="item-name"> تسجيل الخروج</span>
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a class="nav-link" href="route('logout')" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            <i class="icon">
+                                <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.4"
+                                        d="M2 6.447C2 3.996 4.03024 2 6.52453 2H11.4856C13.9748 2 16 3.99 16 6.437V17.553C16 20.005 13.9698 22 11.4744 22H6.51537C4.02515 22 2 20.01 2 17.563V16.623V6.447Z"
+                                        fill="currentColor"></path>
+                                    <path
+                                        d="M21.7787 11.4548L18.9329 8.5458C18.6388 8.2458 18.1655 8.2458 17.8723 8.5478C17.5802 8.8498 17.5811 9.3368 17.8743 9.6368L19.4335 11.2298H17.9386H9.54826C9.13434 11.2298 8.79834 11.5748 8.79834 11.9998C8.79834 12.4258 9.13434 12.7698 9.54826 12.7698H19.4335L17.8743 14.3628C17.5811 14.6628 17.5802 15.1498 17.8723 15.4518C18.0194 15.6028 18.2113 15.6788 18.4041 15.6788C18.595 15.6788 18.7868 15.6028 18.9329 15.4538L21.7787 12.5458C21.9199 12.4008 21.9998 12.2048 21.9998 11.9998C21.9998 11.7958 21.9199 11.5998 21.7787 11.4548Z"
+                                        fill="currentColor"></path>
+                                </svg>
+                            </i>
+                            <span class="item-name"> تسجيل الخروج</span>
+                        </a>
+                    </form>
                 </li>
                 <li>
                     <hr class="hr-horizontal">

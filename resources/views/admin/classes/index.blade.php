@@ -42,7 +42,7 @@
                                                 <option value="">المجموعه</option>
                                                 @foreach ($groups as $group)
                                                 <option value="{{$group->id}}">
-                                                    {{$group->name}}
+                                                    {{$group->name}} | {{ $group->course->name }} | {{ $group->level->name }}
                                                 </option>
                                                 @endforeach
                                             </select>
