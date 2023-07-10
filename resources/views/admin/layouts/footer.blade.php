@@ -1,4 +1,4 @@
-  <footer class="footer">
+  <!--<footer class="footer">
                     <div class="footer-body">
                         <ul class="left-panel list-inline mb-0 p-0">
                             <li class="list-inline-item"><a href="../dashboard/extra/privacy-policy.html">Privacy
@@ -21,4 +21,4 @@
                             </span> by <a href="https://iqonic.design/">IQONIC Design</a>.
                         </div>
                     </div>
-                </footer>
+                </footer>-->
