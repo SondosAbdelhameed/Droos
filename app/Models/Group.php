@@ -25,4 +25,8 @@ class Group extends Model
     {
         return $this->hasMany(Classe::class);
     }
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

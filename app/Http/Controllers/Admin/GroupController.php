@@ -103,7 +103,7 @@ class GroupController extends Controller
         return $file;
     }
     public function printAllBarcode($id){
-		$students = Student::where('group_id', $id)->get();
+		$students = StudentGroup::where('group_id', $id)->get();
 		return view('admin.students.barcodelist',compact('students'));
 	}
 }

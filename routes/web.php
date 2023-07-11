@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ClassController;
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +31,7 @@ Route::group(
         'middleware' => [ 'auth:sanctum' ,'Admin'],
     ],
     function () {
-            Route::get('dashboard', function () {
-                return view('admin.dashboard');
-            })->name('dashboard');
+            Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
             Route::resource('groups', GroupController::class);
             Route::get('create_group_students/{id}', [GroupController::class, 'createStudent'])->name('create_group_students');
             Route::post('store_group_students', [GroupController::class, 'storeGroupStudent'])->name('store_group_students');
@@ -51,9 +51,7 @@ Route::group(
             Route::post('pay-and-attend', [AttendanceController::class, 'payAndAttend'])->name('pay-and-attend');
             Route::post('pay-per-class', [AttendanceController::class, 'payPerClass'])->name('pay-per-class');
             Route::post('pay-per-month', [AttendanceController::class, 'payPerMonth'])->name('pay-per-month');
-            
-            
-            
+            Route::resource('invoices', InvoiceController::class);
     }
 );
 Route::middleware('auth')->group(function () {
