@@ -12,7 +12,7 @@ class GroupSeeder extends Seeder
     public function run(): void
     {
         DB::table('groups')->insert([
-            'name' => 'Group A',
+            'name' => 'مجموعه أ',
             'level_id' => 1,
             'course_id' => 1
         ]);

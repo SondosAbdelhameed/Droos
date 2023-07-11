@@ -13,10 +13,8 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         DB::table('courses')->insert([
-            'name' => 'جغرافيا',
-        ]);
-        DB::table('courses')->insert([
-            'name' => 'تاريخ',
+           [ 'name' => 'مادة الجغرافيا'],
+           [ 'name' => 'مادة التاريخ'],
         ]);
     }
 }

@@ -24,4 +24,8 @@ class Student extends Model
     {
         return $this->belongsTo(Level::class);
     }
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

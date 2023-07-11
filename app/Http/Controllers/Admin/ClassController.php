@@ -18,6 +18,9 @@ class ClassController extends Controller
     public function index()
     {
         $groups = Group::paginate(config('admin.pagination'));
+        $class = Classe::whereNull('closed_at')->first();
+        if($class != '')
+            return redirect()->route('classes.show', $class->id);
         return view('admin.classes.index', compact('groups'));
     }
 
@@ -37,27 +40,13 @@ class ClassController extends Controller
         $this->validate($request, [
         'group_id'=> 'required',
         ]);
-        // return $request;
         if($request->type ==1)
         {
-            $last_class = Classe::where('group_id', $request->group_id)->where('type', 1)->latest('id')->first();
-            if(isset($last_class) == null)
-            {
-                $class = new Classe();
-                $class->group_id = $request->group_id;
-                $class->type = $request->type;
-                $class->save();
-                return redirect()->route('classes.show', $class->id);
-            }
-            elseif(isset($last_class->closed_at) == null){
-                return redirect()->route('classes.show', $last_class->id);
-            }else{
-                $class = new Classe();
-                $class->group_id = $request->group_id;
-                $class->type = $request->type;
-                $class->save();
-                return redirect()->route('classes.show', $class->id);
-            }
+            $class = new Classe();
+            $class->group_id = $request->group_id;
+            $class->type = $request->type;
+            $class->save();
+            return redirect()->route('classes.show', $class->id);
         }elseif($request->type ==2)
         {
             $class = new Classe();

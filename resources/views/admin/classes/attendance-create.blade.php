@@ -5,47 +5,44 @@
 
     <x-slot:heading>
         تسجيل الحضور للحصة : ({{ $class->id }})
-        <div style="display: contents;">
-            <a style="margin-right: 1038px;" class="btn btn-danger" href="{{ route('end-class', $id)}}">غلق الحصة</a>
-        </div>
+
         </x-slot>
         {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
 </x-dashboard.base.nav>
-
 <!-- Nav Header Component End -->
 <!--Nav End-->
 </div>
 {{-- content --}}
 <div class="conatiner-fluid content-inner mt-n5 py-0">
-     {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
     Open modal
   </button> --}}
-      @if(Session::has('paymentshowdialog'))
-        <script>
+    @if(Session::has('paymentshowdialog'))
+    <script>
         $(function() {
             $('#myModal').modal('show');
         });
-      </script>
-        @endif
+    </script>
+    @endif
     @include('admin.classes.paymentmodal')
     @if(Session::has('payment'))
-        <script>
+    <script>
         $(function() {
             $('#PayModal').modal('show');
         });
-      </script>
-        @endif
+    </script>
+    @endif
     @include('admin.classes.paymodal')
     <div>
-    
+
 
 
         <div class="row">
-            <div class="col-xl-3 col-lg-4">
+            <div class="col-xl-5 col-lg-4">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">الطلاب المسجلين :</h4>
+                            <h4 class="card-title">الطلاب المسجلين : {{ count($students) }}</h4>
                         </div>
                     </div>
                     <hr class="hr-horizontal">
@@ -71,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-9 col-lg-8">
+            <div class="col-xl-7 col-lg-8">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
@@ -88,7 +85,7 @@
                                 <div class="form-group">
                                     <label class="form-label" for="email">الطالب :</label>
                                     <input type="text" class="form-control" placeholder="الباركود" name="barcode"
-                                        value="{{ old('barcode') }}" required />
+                                        autofocus="autofocus" value="{{ old('barcode') }}" required />
                                     @error('barcode')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
@@ -97,6 +94,9 @@
                             </form>
                         </div>
                     </div>
+                </div>
+                <div style="display: contents;">
+                    <a style="float: left;" class="btn btn-danger" href="{{ route('end-class', $id)}}">غلق الحصة</a>
                 </div>
             </div>
 

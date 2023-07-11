@@ -36,6 +36,7 @@
                                         <th>رقم الطالب</th>
                                         <th>اسم الطالب</th>
                                         <th>الهاتف</th>
+                                        <th>حالة الدفع</th>
                                         <th style="min-width: 100px">الإعدادات</th>
                                     </tr>
                                 </thead>
@@ -46,6 +47,12 @@
                                         <td>{{ $student->student->barcode }}</td>
                                         <td>{{ $student->student->name }}</td>
                                         <td>{{ $student->student->phone }}</td>
+                                        @if($student->dept_class_no == 0)
+                                        <td><span class="badge bg-danger">لم يدفع</span></td>
+                                        @else
+                                        <td><span class="badge bg-primary">تم الدقع</span></td>
+                                        @endif
+
                                         <td>
                                             <div class="flex align-items-center list-user-action"
                                                 style="display: flex;">
@@ -58,7 +65,7 @@
                                                     <x-dashboard.delete-button></x-dashboard.delete-button>
                                                 </form> --}}
                                                 <button type="button" class="btn btn-info btn-sm"
-                                                    onclick='openmodle("{{route("printbarcode",["id" => $student->id] ) }}")'>
+                                                    onclick='openmodle("{{route("printbarcode",["id" => $student->student->id] ) }}")'>
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em"
                                                         viewBox="0 0 512 512">
                                                         <path
