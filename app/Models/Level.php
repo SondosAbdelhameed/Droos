@@ -21,4 +21,10 @@ class Level extends Model
     {
         return $this->hasMany(MonthlyLevelPrice::class);
     }
+
+//test
+    // public function invoices()
+    // {
+    //     return $this->belongsToMany(Invoice::class, 'groups', 'group_id', 'invoice_id');
+    // }
 }

@@ -52,6 +52,10 @@ Route::group(
             Route::post('pay-per-class', [AttendanceController::class, 'payPerClass'])->name('pay-per-class');
             Route::post('pay-per-month', [AttendanceController::class, 'payPerMonth'])->name('pay-per-month');
             Route::resource('invoices', InvoiceController::class);
+            Route::resource('attendances', AttendanceController::class);
+            Route::post('attendance_show', [AttendanceController::class, 'attendanceShow'])->name('attendance_show');
+            Route::post('fetch-monthes', [AttendanceController::class, 'fetchMonthes'])->name('fetch-monthes');
+            
     }
 );
 Route::middleware('auth')->group(function () {

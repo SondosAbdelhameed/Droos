@@ -7,10 +7,11 @@ use App\Http\Traits\SaveInvoice;
 use App\Models\Attendance;
 use App\Models\Classe;
 use App\Models\Group;
-use App\Models\Invoice;
 use App\Models\MonthlyLevelPrice;
+use App\Models\OtherClasse;
 use App\Models\Student;
 use App\Models\StudentGroup;
+use DB;
 use Illuminate\Http\Request;
 class AttendanceController extends Controller
 {
@@ -20,7 +21,9 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        $groups = Group::get();
+        $monthes = MonthlyLevelPrice::get();
+        return view('admin.attendance.index', compact('groups', 'monthes'));
     }
 
     /**
@@ -36,28 +39,52 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        $student = Student::where('barcode', $request->barcode)->first();
-        $student_group = StudentGroup::where('student_id', $student->id)->where('group_id', $request->group_id)->first();
-        if($student_group !==null)
+        if($request->type ==1)
         {
-             $student_existe = Attendance::where('student_id', $student_group->id)->where('class_id', $request->class_id)->first();
-            if($student_existe ==null)
+            $student = Student::where('barcode', $request->barcode)->first();
+            $student_group = StudentGroup::where('student_id', $student->id)->where('group_id', $request->group_id)->first();
+            if($student_group !==null)
             {
-                if ($student_group->end_date == null && $student_group->end_date <= now() )
+                $student_existe = Attendance::where('student_id', $student_group->student_id)->where('class_id', $request->class_id)->first();
+                if($student_existe ==null)
                 {
-                    return redirect()->back()->with(['paymentshowdialog'=> 'not paid', 'student_id' => $student_group->id, 'class_id' => $request->class_id, 'group_id' => $request->group_id ]);
-                }else{
-                    Attendance::create(['student_id' => $student_group->id, 'class_id' => $request->class_id]);
-                    return redirect()->back()->with('success', 'Added Successfully');
+                    if ($student_group->end_date == null && $student_group->end_date <= now() )
+                    {
+                        return redirect()->back()->with(['paymentshowdialog'=> 'not paid', 'student_id' => $student_group->student_id, 'class_id' => $request->class_id, 'group_id' => $request->group_id ]);
+                    }else{
+                        Attendance::create(['student_id' => $student_group->student_id, 'class_id' => $request->class_id]);
+                        return redirect()->back()->with('success', 'Added Successfully');
+                    }
+                }elseif($student_existe !==null){
+                    return redirect()->back()->with('warning', 'هذا الطالب مسجل بالفعل');
                 }
-            }elseif($student_existe !==null){
-                return redirect()->back()->with('warning', 'هذا الطالب مسجل بالفعل');
+            }
+            else{
+                return redirect()->back()->with('error', ' هذا الطالب غير مسجل بالمجموعه ');
+            }
+            // for morag3a
+        }elseif($request->type == 2)
+        {
+            $student = Student::where('barcode', $request->barcode)->first();
+            $student_group = StudentGroup::where('student_id', $student->id)->where('group_id', $request->group_id)->first();
+            if($student_group !==null)
+            {
+                $student_existe = Attendance::where('student_id', $student_group->student_id)->where('class_id', $request->class_id)->first();
+                if($student_existe ==null)
+                {
+                    Attendance::create(['student_id' => $student_group->student_id, 'class_id' => $request->class_id]);
+                    // save invoice
+                    $other_class = OtherClasse::where('class_id', $request->class_id)->first();
+                    $this->saveInvoice($student->id, $request->group_id, 2, $other_class->price);
+                    return redirect()->back()->with('success', 'Added Successfully');
+                }elseif($student_existe !==null){
+                    return redirect()->back()->with('warning', 'هذا الطالب مسجل بالفعل');
+                }
+            }
+            else{
+                return redirect()->back()->with('error', ' هذا الطالب غير مسجل بالمجموعه ');
             }
         }
-        else{
-            return redirect()->back()->with('error', ' هذا الطالب غير مسجل بالمجموعه ');
-        }
-       
     }
 
     /**
@@ -106,6 +133,8 @@ class AttendanceController extends Controller
         $one_price = $class->group->level->one_price;
         $level = $class->group->level->id;
         $month_level = MonthlyLevelPrice::where('level_id', $level)->latest('id')->first();
+        if ($month_level == '')
+            return redirect()->route('levels.edit', $level)->with('error', 'يرجي اضافة شهر جديد');
         $month_price = $month_level->price;
         $month_end_date = $month_level->end_date;
      return redirect()->back()->with(['payment'=> 'paid', 'student_id' => $request->student_id, 'class_id' => $request->class_id , 'group_id' => $request->group_id, 'one_price' => $one_price, 'month_price' => $month_price, 'month_end_date' => $month_end_date]);
@@ -128,7 +157,7 @@ class AttendanceController extends Controller
         $student = Student::find($request->student_id);
         Attendance::create(['student_id' => $student->id, 'class_id' => $request->class_id]);
         // update end date 
-        $student_group = StudentGroup::where('student_id', $student->id)->where('group_id', $request->group_id)->update(['end_date' => $request->end_date]);
+        $student_group = StudentGroup::where('student_id', $student->id)->where('group_id', $request->group_id)->update(['end_date' => $request->end_date, 'dept_class_no' => 0]);
         //save invoice
         $class = Classe::where('id', $request->class_id)->with('group')->first();
         $level = $class->group->level->id;
@@ -137,5 +166,26 @@ class AttendanceController extends Controller
         $this->saveInvoice($student->id, $request->group_id, 2, $month_price);
         return redirect()->back()->with('success', 'Added Successfully');
     }
-    
+    public function attendanceShow(Request $request)
+    {
+        // return $request;
+        $month = MonthlyLevelPrice::findOrFail($request->month_id);
+        $classes = Classe::where('group_id', $request->group_id)->whereBetween(DB::raw('DATE(created_at)'), [$month->start_date, $month->end_date])->get();
+        $classes_id = $classes->pluck('id');
+        $students = Student::whereHas('groups' , function($query) use($request){
+            $query->where('group_id', $request->group_id);
+        })->with('classes' , function($query) use($classes_id){
+            $query->whereIn('class_id', $classes_id);
+        })->get();
+    // return    $students->load('classes.attendances');
+    return view('admin.attendance.attendance-show', compact('classes', 'students'));
+    }
+    public function fetchMonthes(Request $request)
+    {
+    //  return $request;
+        $group = Group::findOrFail($request->group_id);
+        $monthes = MonthlyLevelPrice::where('level_id', $group->level_id)->get();
+        $html = view('admin.attendance.fetch-month', compact('monthes'))->render();
+        return response()->json(['status' => true, 'result' => $html]);
+    }
 }

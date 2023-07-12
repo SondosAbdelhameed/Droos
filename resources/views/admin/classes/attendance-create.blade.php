@@ -82,6 +82,7 @@
                                 @csrf
                                 <input type="hidden" value="{{ $id }}" name="class_id">
                                 <input type="hidden" value="{{ $class->group_id }}" name="group_id">
+                                <input type="hidden" value="{{ $class->type }}" name="type">
                                 <div class="form-group">
                                     <label class="form-label" for="email">الطالب :</label>
                                     <input type="text" class="form-control" placeholder="الباركود" name="barcode"

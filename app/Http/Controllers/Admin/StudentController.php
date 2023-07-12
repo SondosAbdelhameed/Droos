@@ -16,10 +16,16 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::paginate(config('admin.pagination'));
-        return view('admin.students.index', compact('students'));
+        // $students = Student::paginate(config('admin.pagination'));
+         $search = $request->search;
+         $students = Student::whenSearch($request->search)->orWhereHas('level' , function($q) use($search) {
+                $q->where('name',$search)->orWhere('name', 'like', '%' .$search. '%');})
+                ->orWhereHas('groups' , function($q) use($search) {
+                $q->where('name', 'like', '%' .$search. '%');})
+                ->paginate(config('admin.pagination'));
+        return view('admin.students.index', compact('students', 'search'));
     }
 
     /**

@@ -64,8 +64,9 @@ class ClassController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
+        // return 1;
         $class = Classe::find($id);
         $students = Attendance::where('class_id', $id)->get();
         return view('admin.classes.attendance-create', compact('id', 'class','students'));

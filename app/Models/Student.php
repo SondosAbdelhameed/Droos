@@ -12,6 +12,13 @@ class Student extends Model
     {
         return 'data/dashboard/students';
     }
+    public function scopeWhenSearch($query,$search){
+          return $query->when($search,function($q)use($search){
+              return $q->where('barcode',$search)
+                  ->orWhere('name','like',"%$search%")
+                  ->orWhere('phone','like',"%$search%");
+          });
+        }
     public function attendances()
     {
         return $this->hasMany(Attendance::class);
@@ -20,6 +27,10 @@ class Student extends Model
     {
         return $this->belongsToMany(Group::class, 'student_groups', 'student_id', 'group_id');
     }
+    public function studentGroups()
+    {
+        return $this->hasMany(StudentGroup::class);
+    }
     public function level()
     {
         return $this->belongsTo(Level::class);
@@ -27,5 +38,9 @@ class Student extends Model
     public function invoices()
     {
         return $this->hasMany(Invoice::class);
+    }
+    public function classes()
+    {
+        return $this->belongsToMany(Classe::class, 'attendances', 'student_id', 'class_id');
     }
 }
