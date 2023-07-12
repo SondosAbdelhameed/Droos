@@ -83,12 +83,12 @@
                                     <div class="new-user-info">
                                         @foreach ($courses as $course)
                                         <div class="form-group">
-                                            <label class="form-label">مادة {{ $course->name }}</label>
+                                            <label class="form-label">{{ $course->name }}</label>
                                             <select class="form-control" name="group_id[]">
                                                 <option value="" selected disabled>المجموعه</option>
                                                 @foreach ($course->groups as $group)
                                                 <option value="{{$group->id}}">
-                                                    {{$group->name}}
+                                                    {{$group->name}} | {{$group->level->name}}
                                                 </option>
                                                 @endforeach
                                             </select>

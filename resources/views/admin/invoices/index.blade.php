@@ -24,15 +24,48 @@
                     </div>
                     <div class="card-body px-0">
                         <form action="{{ route('invoices.index') }}" method="get" style="padding: 20px;">
-                         @csrf
+                            @csrf
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col">
                                     <label>عرض من تاريخ</label>
                                     <input type="date" class="form-control" name="from" value="{{ old('name') }}">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col">
                                     <label> الي تاريخ</label>
                                     <input type="date" class="form-control" name="to" value="{{ old('name') }}">
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">المستوي :</label>
+                                    <select class="form-control" name="level_id">
+                                        <option value="">المستوي</option>
+                                        @foreach ($levels as $level)
+                                        <option value="{{$level->id}}">
+                                            {{$level->name}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">المجموعه :</label>
+                                    <select class="form-control" name="group_id">
+                                        <option value="">المجموعه</option>
+                                        @foreach ($groups as $group)
+                                        <option value="{{$group->id}}">
+                                            {{$group->name}} | {{ $group->level->name }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label class="form-label">المادة :</label>
+                                    <select class="form-control" name="course_id">
+                                        <option value="">المادة</option>
+                                        @foreach ($courses as $course)
+                                        <option value="{{$course->id}}">
+                                            {{$course->name}}
+                                        </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-md-4 mt-4">
                                     <button type="submit" class="btn btn-primary"><svg

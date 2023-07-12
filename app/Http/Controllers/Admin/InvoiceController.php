@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
+use App\Models\Group;
 use App\Models\Invoice;
+use App\Models\Level;
 use DB;
 use Illuminate\Http\Request;
 
@@ -14,14 +17,25 @@ class InvoiceController extends Controller
      */
     public function index(Request $request)
     {
-        $invoice = Invoice::paginate(config('admin.pagination'));
-        if (isset($request->from) && isset($request->to)) {
-            $invoices = Invoice::where('created_at', '>=', $request->from)->where('created_at', '<=', $request->to)->paginate(config('admin.pagination'));
-        }else{
-            $invoices = Invoice::paginate(config('admin.pagination'));
-        }
+        $levels = Level::get();
+        $courses = Course::get();
+        $groups = Group::get();
+        $invoices = Invoice::with('student');
+        if (isset($request->from) && isset($request->to))
+            $invoices = $invoices->whereBetween(DB::raw('DATE(created_at)'), [$request->from, $request->to]);
+        if(isset($request->level_id))
+            $invoices = $invoices->whereHas('student', function($query) use($request){
+                    $query->where('level_id', $request->level_id);
+                });
+        if(isset($request->course_id))
+            $invoices = $invoices->whereHas('group', function($query) use($request){
+                    $query->where('course_id', $request->course_id);
+                });
+        if (isset($request->group_id))
+            $invoices->where('group_id', $request->group_id);
+        $invoices = $invoices->paginate(config('admin.pagination'));
         $sum = $invoices->sum('price');
-        return view('admin.invoices.index', compact('invoices', 'sum'));
+        return view('admin.invoices.index', compact('invoices', 'sum', 'levels', 'courses','groups'));
     }
 
     /**

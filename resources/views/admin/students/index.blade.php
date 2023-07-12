@@ -26,6 +26,25 @@
                         </div>
                     </div>
                     <div class="card-body px-0">
+                         <form action="{{ route('students.index') }}" method="get" style="padding: 20px;">
+                                @csrf
+                                <div class="row">
+                                <div class="col-md-4">
+                                <input type="text" class="form-control" placeholder="بحث" name="search" value="{{ $search }}">
+                           </div>
+                           <div class="col-md-4 ">
+                                    <button type="submit" class="btn btn-primary"><svg
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                            <path
+                                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                        </svg>
+                                    </button>
+                                    <a class="btn btn-danger" href="{{ route('students.index')}}"><span
+                                            aria-hidden="true">&times;</span></a>
+                                </div>
+                            </div>
+                            </form>
                         <div class="table-responsive">
                             <table id="user-list-table" class="table table-striped" role="grid">
                                 <thead>
@@ -35,6 +54,7 @@
                                         <th>اسم الطالب</th>
                                         <th>الهاتف</th>
                                         <th>المستوي</th>
+                                        <th>المجموعات</th>
                                         {{-- <th>المادة</th> --}}
                                         <th style="min-width: 100px">الإعدادات</th>
                                     </tr>
@@ -47,7 +67,14 @@
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->phone }}</td>
                                         <td>{{ $student->level->name }}</td>
-                                        {{-- <td>{{ $student->group->course->name }}</td> --}}
+                                        <td>
+                                            @foreach ($student->studentGroups as $group)
+                                            {{ $group->group->name }}&nbsp;
+                                            @if ($group->dept_class_no > 0)
+                                            <span class="badge bg-danger">{{ $group->dept_class_no }} </span> &nbsp;
+                                            @endif
+                                            @endforeach
+                                        </td>
                                         <td>
                                             <div class="flex align-items-center list-user-action"
                                                 style="display: flex;">
