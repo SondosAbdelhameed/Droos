@@ -47,7 +47,7 @@
                                         <td>{{ $student->student->barcode }}</td>
                                         <td>{{ $student->student->name }}</td>
                                         <td>{{ $student->student->phone }}</td>
-                                        @if($student->dept_class_no == 0)
+                                        @if($student->end_date == null)
                                         <td><span class="badge bg-danger">لم يدفع</span></td>
                                         @else
                                         <td><span class="badge bg-primary">تم الدقع</span></td>

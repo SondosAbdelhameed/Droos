@@ -2,13 +2,15 @@
 @section('content')
 <!-- Nav Header Component Start -->
 <x-dashboard.base.nav>
-    <x-slot:heading>
+    {{-- <x-slot:heading>
         عرض كشف الحضور
+        </x-slot> --}}
+           <x-slot:heading>
+        اسم المجموعه : ({{ $group->name }}) <br>
+        المستوي : ({{ $group->level->name }}) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        الماده : ({{ $group->course->name }})
         </x-slot>
         {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
-        <x-slot:link>
-            {{ route('groups.create') }}
-            </x-slot>
 </x-dashboard.base.nav>
 <!-- Nav Header Component End -->
 <!--Nav End-->
@@ -22,7 +24,8 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <div class="header-title">
-                            <h4 class="card-title">عرض كشف الحضور</h4>
+                            <h4 class="card-title"> عرض كشف الحضور من : {{ $month->start_date->format('Y/m/d') }} الي : {{ $month->end_date->format('Y/m/d') }}</h4>
+                            
                         </div>
                     </div>
                     <div class="card-body px-0">
