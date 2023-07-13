@@ -1,5 +1,8 @@
 @extends('admin.layouts.master')
 @section('content')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
         <!-- Nav Header Component Start -->
         <div class="iq-navbar-header" style="height: 215px;">
             <div class="container-fluid iq-container">
@@ -149,22 +152,62 @@
                     </div>
                 </div>
             </div>
-             
-            <center>
-                <h1>
-                    مرحبـــــــــــــــــــــــــــــــــاً
-                    <br>
-                    مــــــــــــــدير المنصــــــة
-                    <br>
-                    نظــــــــــــــــــــام متكامــــــــــــل لمتابعــــــــــة الطلاب
-                </h1>
-                <img src="{{ asset('assets\admin\images\logo.png')}}" width="200px">
-                <h1>
-                    منصـــــــــــــة دروس
-                </h1>
-            </center>
+        </div>   
+        
+        <div class="conatiner">
+            <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <center>
 
+                    <img src="{{ asset('assets\admin\images\logo.png')}}" width="220px">
+                    <h1>
+                        منصـــــــــــــة دروس
+                        <br>
+                        نظــــــــــــــــــــام متكامــــــــــــل لمتابعــــــــــة الطلاب
+                    </h1>
+                </center>
 
-        </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <canvas id="myChart" style="width:100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+             </div>
+             </div>
     </div>
+
+
+    
+
+
+
+
+
+    <script>
+var xValues = ["", "يناير", "فبراير", "مارس", "إبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+var yValues = [0, 2000, 1400, 1600, 1500, 1800, 2000, 1200, 1400, 1800, 1500, 1200, 1900];
+var barColors = ["", "#3a57e8", "#3a57e8","#3a57e8","#3a57e8","#3a57e8", "#3a57e8", "#3a57e8","#3a57e8","#3a57e8","#3a57e8", "#3a57e8", "#3a57e8"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "تقرير الارباح الشهرية"
+    }
+  }
+});
+</script>
 @endsection

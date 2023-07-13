@@ -27,17 +27,17 @@
                             @csrf
                             <div class="row">
                                 <div class="col">
-                                    <label>عرض من تاريخ</label>
+                                    <label class="form-label">عرض من تاريخ</label>
                                     <input type="date" class="form-control" name="from" value="{{ old('name') }}">
                                 </div>
                                 <div class="col">
-                                    <label> الي تاريخ</label>
+                                    <label class="form-label"> الي تاريخ</label>
                                     <input type="date" class="form-control" name="to" value="{{ old('name') }}">
                                 </div>
                                 <div class="col">
                                     <label class="form-label">المستوي :</label>
                                     <select class="form-control" name="level_id">
-                                        <option value="">المستوي</option>
+                                        <option value="">اختر المستوي </option>
                                         @foreach ($levels as $level)
                                         <option value="{{$level->id}}">
                                             {{$level->name}}
@@ -48,7 +48,7 @@
                                 <div class="col">
                                     <label class="form-label">المجموعه :</label>
                                     <select class="form-control" name="group_id">
-                                        <option value="">المجموعه</option>
+                                        <option value="">اختر المجموعة</option>
                                         @foreach ($groups as $group)
                                         <option value="{{$group->id}}">
                                             {{$group->name}} | {{ $group->level->name }}
@@ -59,7 +59,7 @@
                                 <div class="col">
                                     <label class="form-label">المادة :</label>
                                     <select class="form-control" name="course_id">
-                                        <option value="">المادة</option>
+                                        <option value="">اختر المادة</option>
                                         @foreach ($courses as $course)
                                         <option value="{{$course->id}}">
                                             {{$course->name}}
@@ -67,7 +67,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-4 mt-4">
+                                <div class="col-md-4" style=" margin-top: 30px !important;">
                                     <button type="submit" class="btn btn-primary"><svg
                                             xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
