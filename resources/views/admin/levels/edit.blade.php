@@ -3,9 +3,9 @@
 <!-- Nav Header Component Start -->
 <x-dashboard.base.nav>
     <x-slot:heading>
-       المستوي - الثاني الثانوي
-    </x-slot>
-    {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
+        المستوي - الثاني الثانوي
+        </x-slot>
+        {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
 </x-dashboard.base.nav>
 <!-- Nav Header Component End -->
 <!--Nav End-->
@@ -31,13 +31,14 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{route('levels.update',$level->id)}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('levels.update',$level->id)}}" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         @method('patch')
                                         <div class="form-group">
                                             <label class="form-label" for="email">سعر الحصة:</label>
-                                            <input type="number" class="form-control" placeholder="السعر" name="one_price"
-                                                value="{{ $level->one_price }}" required />
+                                            <input type="number" class="form-control" placeholder="السعر"
+                                                name="one_price" value="{{ $level->one_price }}" required />
                                             @error('one_price')
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
@@ -66,13 +67,15 @@
                     <div class="card-body px-0">
                         <div class="col-sm-12 col-lg-6">
                             <div class="card">
+                                @if ($last_month == '' || ($last_month != '' && $last_month->days <= 2) )
                                 <div class="card-header d-flex justify-content-between">
                                     <div class="header-title">
                                         <h4 class="card-title">اضافة شهر</h4>
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{route('level-store-month')}}" method="post" enctype="multipart/form-data">
+                                    <form action="{{route('level-store-month')}}" method="post"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <input type="hidden" name="level_id" value="{{ $level->id }}">
                                         <div class="form-group">
@@ -99,9 +102,11 @@
                                             <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                         <button type="submit" class="btn btn-primary">حفظ</button>
                                     </form>
                                 </div>
+                                @endif
                             </div>
                             <table class="table">
                                 <thead>
@@ -114,7 +119,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($monthes as $index=>$month)
-                                     <tr>
+                                    <tr>
                                         <td>{{ $index+1 }}</td>
                                         <td>{{ $month->price }}</td>
                                         <td>{{ $month->start_date->format('Y/m/d') }}</td>

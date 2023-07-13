@@ -51,7 +51,9 @@ class LevelController extends Controller
     {
         // return $level;
         $monthes = MonthlyLevelPrice::where('level_id', $level->id)->get();
-        return view('admin.levels.edit', compact('level','monthes'));
+        $last_month = MonthlyLevelPrice::where('level_id', $level->id)->latest()->first();
+        
+        return view('admin.levels.edit', compact('level','monthes', 'last_month'));
     }
 
     /**

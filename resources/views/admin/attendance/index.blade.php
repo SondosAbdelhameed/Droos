@@ -6,9 +6,6 @@
         الغياب
         </x-slot>
         {{-- We are on a mission to help developers like you build successful projects for FREE. --}}
-        <x-slot:link>
-            {{ route('groups.create') }}
-            </x-slot>
 </x-dashboard.base.nav>
 <!-- Nav Header Component End -->
 <!--Nav End-->
